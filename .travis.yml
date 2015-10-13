@@ -9,4 +9,4 @@ python:
   - "3.5-dev"
   - "nightly"
 # command to run tests
-script: nosetests
+script: python start.py
