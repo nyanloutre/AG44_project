@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import io, re
 from networkx import MultiDiGraph
-from oauthlib.uri_validate import path
+#from oauthlib.uri_validate import path
 
 class game(MultiDiGraph):
     
