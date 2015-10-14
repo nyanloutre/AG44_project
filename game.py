@@ -42,21 +42,28 @@ class game(MultiDiGraph):
         return components
 
 
-    def dfs(self, startnode, stack = list(), revstack = list()):
+    def dfs(self, startnode, stack = None, revstack = None):
         '''Recursive depth-first traversal, it store the nodes on a stack'''
-
+        
+        if stack == None:
+            stack = list()
+        if revstack == None:
+            revstack = list()
         successors = self.successors(startnode)
         stack.append(startnode)
         if len(successors) != 0:
             for succ in successors:
                 if stack.count(succ) == 0:
-                    self.dfs(succ, stack)
+                    revstack = self.dfs(succ, stack, revstack)
         revstack.append(startnode)
         return revstack
 
 
-    def strongdetection(self, dfs_stack, stack=list()):
+    def strongdetection(self, dfs_stack, stack=None):
         '''List all the strongly components while they are nodes'''
+        
+        if stack == None:
+            stack = list()
         while len(dfs_stack) > 0:
             stack.append(self.strongcomponent(dfs_stack.pop(), dfs_stack, []))
         
@@ -74,9 +81,11 @@ class game(MultiDiGraph):
         return currstrong
 
 
-    def reducedgraph(self, strongcomponents):
+    def reducedgraph(self, strongcomponents = None):
         '''Generate the reduced graph from the strong components'''
-
+        
+        if strongcomponents == None:
+            strongcomponents = self.levels()
         newgraph = game()
         i = 1
         for currcomponent in strongcomponents:
@@ -107,9 +116,11 @@ class game(MultiDiGraph):
         return matrix
 
 
-    def longestpath(self, startnode, endnode, path = []):
+    def longestpath(self, startnode, endnode, path = None):
         '''Find the longest path by testing all the possibilities'''
-
+        
+        if path == None:
+            path = list()
         if path.count(startnode) == 0:
             path.append(startnode)
             if startnode != endnode:
