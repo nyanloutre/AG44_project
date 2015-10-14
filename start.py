@@ -21,8 +21,11 @@ if __name__ == "__main__":
     
     print("Longest path :")
     
-    startnode = int(input("Enter the starting node : "))
-    endnode = int(input("Enter the ending node : "))
+    '''startnode = int(input("Enter the starting node : "))
+    endnode = int(input("Enter the ending node : "))'''
+
+    startnode = 1
+    endnode = 8
     
     i=1
     
