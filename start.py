@@ -6,21 +6,34 @@ if __name__ == "__main__":
     G=game()
     G.importfile('mat1.txt')
 
-    print("My algorithm")
-        
+    print("Strongly connected components :")
+    
     strongcomp = G.levels()
         
     print(strongcomp)
     
-    reduced = G.reducedgraph(strongcomp)
+    print("Reduced matrix :")
     
-    print(reduced.edges())
-    
-    print(reduced.successors(2))
-    print(reduced.out_degree(2))
+    reduced = G.reducedgraph()
 
-    print(reduced.generatematrix())
+    for line in reduced.generatematrix():
+        print(line)
     
-    longpath = G.longestpath(3,2)
+    print("Longest path :")
+    
+    startnode = int(input("Enter the starting node : "))
+    endnode = int(input("Enter the ending node : "))
+    
+    i=1
+    
+    for comp in strongcomp:
+    
+        if comp.count(startnode) > 0:
+            startnode = i
+        if comp.count(endnode) > 0:
+            endnode = i
+        i+=1
+    
+    longpath = reduced.longestpath(startnode,endnode)
     
     print(longpath)
